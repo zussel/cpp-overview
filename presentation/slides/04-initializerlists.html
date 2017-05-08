@@ -17,27 +17,27 @@ int_vector.push_back(6);
         <p>
             Anhand von Initialisierungslisten können Klassen und
             Container einheitlich initialisiert werden.
-            <pre><code class="hljs" data-trim contenteditable>
+        </p>
+        <pre><code class="hljs" data-trim contenteditable>
 std::vector&lt;int&gt; int_vector = {1,2,3,4,5,6};
 
 for (int i : {1,2,3,4,5,6}) {
     std::cout &lt;&lt; i &lt;&lt; "\n";
 }
-            </code></pre>
-        </p>
+        </code></pre>
     </section>
     <section>
         <p>
-            Beispiel einer Klasse, die eine Initialisierungsliste per
-            Konstruktor zur Verfügung stellt.
-            <pre><code class="hljs" data-trim contenteditable>
-struct columns
-{
+            Klasse mit Initialisierungslisten-Konstruktor.
+        </p>
+        <pre><code class="hljs" data-trim contenteditable>
+struct columns {
     std::vector&lt;std::string&gt column_vector;
 
     columns(std::initializer_list&lt;std::string&gt; names)
         : column_vector(names)
     { }
+
     columns&amp; operator=(std::initializer_list&lt;std::string&gt; names)
     {
         column_vector.assign(name.begin(), names.end());
@@ -46,7 +46,18 @@ struct columns
 };
 
 columns cols = { "id", "name", "height", "width", "lenght" };
-            </code></pre>
-        </p>
+        </code></pre>
+    </section>
+    <section>
+        <p>Verschachtelte Initialisierungslisten</h2>
+        <pre><code class="hljs" data-trim contenteditable>
+struct columns { /* ... */ };
+
+std::vector&lt;columns&gt columns_vector = {
+    { "id", "name", "height", "width", "lenght" },
+    { "id", "site", "from", "to"},
+    { "id", "name", "weight", "mother", "father"}
+}
+        </code></pre>
     </section>
 </section>
