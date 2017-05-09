@@ -1,0 +1,30 @@
+<section>
+    <section>
+        <h2>Smarte Pointer</h2>
+        <p>C++ hat keine eingebaute Garbage Collection. Jeder muss seinen
+            M&uuml;ll selber wegr&auml;umen.</p>
+        <p class="fragment">Ab c++11 werden aber clevere Helfer zur Verfügung gestellt.</p>
+    </section>
+    <section>
+        <p>Frage: Hast Du den Speicher auch wieder freigegeben?</p>
+        <pre><code class="hljs" data-trim contenteditable>
+void foo()
+{
+    int *i = new int;
+    *i = 8;
+}
+        </code></pre>
+        <p class="fragment">Antwort: Hab ich vergessen...</p>
+    </section>
+    <section>
+        <p>L&ouml;sung ist <i>unique_ptr&lt;T&gt;</i></p>
+        <pre><code class="hljs" data-trim contenteditable>
+void foo()
+{
+    auto i = std::make_unique&lt;int&gt;(7);
+    // mach was damit
+    *i = 8;
+}
+        </code></pre>
+    </section>
+</section>

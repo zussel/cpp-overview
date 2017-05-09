@@ -3,7 +3,7 @@
         <h2>Initialisierungslisten</h2>
         <p>Bisher aufwendiger Code zum Initialisieren von Container</p>
         <pre><code class="hljs" data-trim contenteditable>
-std::vector&lt;int&gt int_vector;
+std::vector&lt;int&gt; int_vector;
 
 int_vector.push_back(1);
 int_vector.push_back(2);
@@ -11,6 +11,10 @@ int_vector.push_back(3);
 int_vector.push_back(4);
 int_vector.push_back(5);
 int_vector.push_back(6);
+
+for (int i : int_vector) {
+    std::cout &lt;&lt; i &lt;&lt; "\n";
+}
         </code></pre>
     </section>
     <section>
@@ -19,9 +23,9 @@ int_vector.push_back(6);
             Container einheitlich initialisiert werden.
         </p>
         <pre><code class="hljs" data-trim contenteditable>
-std::vector&lt;int&gt; int_vector = {1,2,3,4,5,6};
+std::vector&lt;int&gt; int_vector = {0, 1, 2, 3, 4, 5, 6};
 
-for (int i : {1,2,3,4,5,6}) {
+for (int i : {0, 1, 2, 3, 4, 5, 6}) {
     std::cout &lt;&lt; i &lt;&lt; "\n";
 }
         </code></pre>
