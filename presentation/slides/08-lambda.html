@@ -1,5 +1,27 @@
 <section>
-    <h2>Lambda Funktionen</h2>
-    <pre><code class="hljs" data-trim contenteditable>
-    </code></pre>
+    <section>
+        <h2>Lambda Funktionen</h2>
+        <p>Lambda Funktionen sind anonyme Funktionen die ihre gebundenen
+            Variablen konservieren</p>
+        <pre><code class="hljs" data-trim contenteditable>
+        </code></pre>
+    </section>
+    <section>
+        <p>Vor Lambda Funktion gab es Funktionsobjekte</p>
+        <pre><code class="hljs cpp" data-trim>
+class adder {
+public:
+  adder(int x) : x(x) {}
+  int operator()(int y) const { return x + y; }
+
+  int x;
+};
+
+// create an instance of the functor class
+adder add42(42);
+
+// and "call" it
+int i = add42(8);
+        </code></pre>
+    </section>
 </section>
