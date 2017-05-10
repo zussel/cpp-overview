@@ -1,5 +1,34 @@
 <section>
     <section>
         <h2>Das <i>auto</i> Schl&uuml;sselwort</h2>
+        <p>Das <i>auto</i> Schl&uuml;sselwort steht f&uuml;r einen unbekannten
+        Datentyp, den der Compiler selbstst&auml;ndig bestimmt.</p>
+        <p class="fragment">Was hei&szlig;t das?</p>
+    </section>
+    <section>
+        <p>Deklaration eines iterators eines verschachtelten Containers:</p>
+        <pre><code class="hljs" data-trim contenteditable>
+std::map&lt;std::string, int&gt; string_int_map;
+
+std::map&lt;std::string, int&gt;::iterator i = string_int_map.begin();
+        </code></pre>
+    </section>
+    <section>
+        <p>Die gleiche Deklaration mit dem  <i>auto</i> Schl&uuml;sselwort</p>
+        <pre><code class="hljs" data-trim contenteditable>
+std::map&lt;std::string, int&gt; string_int_map;
+
+auto i = string_int_map.begin();
+        </code></pre>
+    </section>
+    <section>
+        <p>Beispiel mit Template und Stack</p>
+        <pre><code class="hljs" data-trim contenteditable>
+std::unique_ptr&lt;std::map&lt;std::string, int&gt;&gt;(new std::map&lt;std::string, int&gt;);
+
+// vs
+
+auto ptr = std::make_unique&lt;std::map&lt;std::string, int&gt;&gt;();            
+        </code></pre>
     </section>
 </section>

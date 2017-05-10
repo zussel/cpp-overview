@@ -27,4 +27,25 @@ void foo()
 }
         </code></pre>
     </section>
+    <section>
+        <p>Referenzz&auml;hler inklusive mit <i>shared_ptr</i></p>
+        <pre><code class="hljs" data-trim contenteditable>
+auto i1 = std::make_shared&lt;int&gt;(7);
+std::cout &lt;&lt; "use count: " &lt;&lt; i1.use_count() &lt;&lt; "\n";
+
+// $ use count: 1
+
+auto i2 = i1;
+std::cout &lt;&lt; "use count: " &lt;&lt; i1.use_count() &lt;&lt; "\n";
+
+// $ use count: 2
+
+i2.reset();
+i1.reset();
+// last reset destroys pointer
+        </code></pre>
+    </section>
+    <section>
+        <p>Was ist aber mit zyklischen shared_ptr Verweise?</p>
+    </section>
 </section>
