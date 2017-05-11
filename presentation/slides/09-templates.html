@@ -1,10 +1,58 @@
 <section>
     <section>
         <h2>Template Meta Programming</h2>
-        <ul>
-            <li>Fibonacci</li>
-            <li>traits</li>
-            <li>assert</li>
-        </ul>
+        <p>TMP erlaubt es Berechnungen, Entscheidungen oder Validierungen
+            schon w&auml;hrend der Compilezeit vorzunehmen</p>
+        <p class="fragment">Weiterhin wurden Templates um <i>Variadic Templates</i>
+        erweitert, eine beliebige Anzahl von Template Parametern zu beschreiben.</p>
+    </section>
+    <section>
+        <p>Variadic Templates: <i>adder</i> Funktion</p>
+        <pre><code class="hljs cpp" data-trim>
+template&lt;typename T&gt;
+T adder(T v) {
+  return v;
+}
+
+template&lt;typename T, typename... Args&gt;
+T adder(T first, Args... args) {
+  return first + adder(args...);
+}
+
+long sum = adder(1, 2, 3, 8, 7);
+        </code></pre>
+    </section>
+    <section>
+        <p>Berechnungen: Fibonacci</p>
+        <pre><code class="hljs cpp" data-trim>
+template&lt;int n&gt;
+struct fibonacci
+{
+  static constexpr int value =
+    fibonacci&lt;n-1&gt;::value + fibonacci&lt;n-2&gt;::value;
+};
+template&lt;&gt;
+struct fibonacci&lt;0&gt;
+{
+  static constexpr int value = 0;
+};
+template&lt;&gt;
+struct fibonacci&lt;1&gt;
+{
+  static constexpr int value = 1;
+};
+        </code></pre>
+    </section>
+    <section>
+        <p>Berechnungen: Fibonacci</p>
+        <pre><code class="hljs cpp" data-trim>
+std::cout &lt;&lt; "fibonacci&lt;40&gt;: " &lt;&lt; fibonacci&lt;40&gt;::value &lt;&lt; "\n";
+        </code></pre>
+    </section>
+    <section>
+        <p>Traits</p>
+    </section>
+    <section>
+        <p>Assert</p>
     </section>
 </section>

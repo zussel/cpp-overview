@@ -9,8 +9,7 @@
     <section>
         <p>Vor Lambda Funktion gab es Funktionsobjekte</p>
         <pre><code class="hljs cpp" data-trim>
-class adder {
-public:
+struct adder {
   adder(int x) : x(x) {}
   int operator()(int y) const { return x + y; }
 
