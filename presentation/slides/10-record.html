@@ -10,4 +10,19 @@
             <li>Move Semantik</li>
         </ul>
     </section>
+    <section>
+        <p>Threads können sehr einfach erzeugt werden:</p>
+        <pre><code class="hljs cpp" data-trim>
+using namespace std::chrono_literals; // for second literal
+
+// create and start thread
+std::thread t([](){
+    std::this_thread::sleep_for(1s);
+});
+std::cout << "main thread\n";
+
+// wait for thread to end
+t.join();
+        </code></pre>
+    </section>
 </section>
