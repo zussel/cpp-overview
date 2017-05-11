@@ -5,7 +5,6 @@
         <ul>
             <li>Threads</li>
             <li>Regul&auml;re Ausdr&uuml;cke</li>
-            <li>Dateisystem</li>
             <li>Tuples</li>
             <li>Move Semantik</li>
         </ul>
@@ -23,6 +22,39 @@ std::cout << "main thread\n";
 
 // wait for thread to end
 t.join();
+        </code></pre>
+    </section>
+    <section>
+        <p>Tuples erlauben es Werten verschiedener Typen dynamisch in ein Objekt zu bündeln</p>
+        <pre><code class="hljs cpp" data-trim>        
+std::tuple&lt;int,char&gt; foo (10,'x');
+auto bar = std::make_tuple ("test", 3.1, 14, 'y');
+
+std::get&lt;2&gt;(bar) = 100; // access element
+
+
+std::get&lt;0&gt;(foo) = std::get&lt;2&gt;(bar);
+std::get&lt;1&gt;(foo) = 'y';
+
+std::cout &lt;&lt; "foo contains: ";
+std::cout &lt;&lt; std::get&lt;0&gt;(foo) &lt;&lt; ' ';
+std::cout &lt;&lt; std::get&lt;1&gt;(foo) &lt;&lt; '\n';
+        </code></pre>
+    </section>
+    <section>
+        <p><i>std::tie</i> zum Auspacken</p>
+        <pre><code class="hljs cpp" data-trim>
+std::tuple&lt;int,char&gt; foo (10,'x');
+auto bar = std::make_tuple ("test", 3.1, 14, 'y');
+
+int myint; char mychar;
+
+// unpack elements
+std::tie (myint, mychar) = foo;
+// unpack (with ignore)
+std::tie (std::ignore, std::ignore, myint, mychar) = bar;
+
+mychar = std::get&lt;3&gt;(bar);
         </code></pre>
     </section>
 </section>
