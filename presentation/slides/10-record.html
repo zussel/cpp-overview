@@ -25,13 +25,60 @@ t.join();
         </code></pre>
     </section>
     <section>
+        <p>Reguläre Ausdrücke: Programm zum Filtern von EMail Adressen aus einer Liste</p>
+        <pre><code class="hljs cpp" data-trim>
+set&lt;string&gt; get_addresses(istream& is)
+{
+  set&lt;std::string&gt; addr;
+  // email address pattern
+  std::regex pat { R"((\w+([.-]\w+)*)@(\w+([.-]\w+)*))"};
+  std::smatch m;
+  for (string s; std::getline(is,s); ) { // read a line
+    if (std::regex_search(s, m, pat)) {  // look for the pattern
+      addr.insert(m[0]);                 // save address in set
+    }
+  }
+  return addr;
+}
+        </code></pre>
+    </section>
+    <section>
+        <p>Ausführung</p>
+        <pre><code class="hljs cpp" data-trim>
+// a stream initialized to a string containing some addresses
+std::istringstream test {
+  "asasasa\n"
+  "bs@foo.com\n"
+  "ms@foo.bar.com$aaa\n"
+  "ms@foo.bar.com aaa\n"
+  "asdf bs.ms@x\n"
+  "$$bs.ms@x$$goo\n"
+  "cft foo-bar.ff@ss-tt.vv@yy asas"
+  "qwert\n"
+};
+ 
+auto addr = get_addresses(test);  // get the email addresses
+for (auto&amp; s : addr) {        // write out the addresses
+    cout &lt;&lt; s &lt;&lt; '\n';
+}
+        </code></pre>
+    </section>
+    <section>
+        <p>Ergebnis</p>
+        <pre><code class="hljs bash" data-trim>
+bs.ms@x
+bs@foo.com
+foo-bar.ff@ss-tt.vv
+ms@foo.bar.com
+        </code></pre>
+    </section>
+    <section>
         <p>Tuples erlauben es Werten verschiedener Typen dynamisch in ein Objekt zu bündeln</p>
         <pre><code class="hljs cpp" data-trim>        
 std::tuple&lt;int,char&gt; foo (10,'x');
 auto bar = std::make_tuple ("test", 3.1, 14, 'y');
 
 std::get&lt;2&gt;(bar) = 100; // access element
-
 
 std::get&lt;0&gt;(foo) = std::get&lt;2&gt;(bar);
 std::get&lt;1&gt;(foo) = 'y';
@@ -56,5 +103,42 @@ std::tie (std::ignore, std::ignore, myint, mychar) = bar;
 
 mychar = std::get&lt;3&gt;(bar);
         </code></pre>
+    </section>
+    <section>
+        <p>Die Move Semantik erlaubt es Speicher eines RValues zu verschieben</p>
+        <p class="fragment">LValue: Wert links von Zuweisungsoperator (=)</p>
+        <p class="fragment">RValue: Wert rechts von Zuweisungsoperator</p>
+        <p class="fragment">Beispiel: string Klasse</p>
+    </section>
+    <section>
+        <pre><code class="hljs cpp" data-trim>
+struct string {
+    char* data;
+
+    string(const char* p) {
+        size_t size = strlen(p) + 1;
+        data = new char[size];
+        memcpy(data, p, size);
+    }
+    ~string() {
+        delete[] data;
+    }
+    string(const string&amp; that) {
+        size_t size = strlen(that.data) + 1;
+        data = new char[size];
+        memcpy(data, that.data, size);
+    }
+};
+        </code></pre>
+    </section>
+    <section>
+        <p>Was passiert bei folgendem Code</p>
+        <pre><code class="hljs cpp" data-trim>
+string a(x);                                    // Line 1
+string b(x + y);                                // Line 2
+string c(some_function_returning_a_string());   // Line 3
+        </code></pre>
+        <p class="fragment">1: notwendiger Aufruf des Copy Konstruktors (LValue)</p>
+        <p class="fragment">2+3: unnötiger Aufruf des Copy Konstruktors (RValue)</p>
     </section>
 </section>
