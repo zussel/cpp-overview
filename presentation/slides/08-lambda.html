@@ -3,8 +3,7 @@
         <h2>Lambda Funktionen</h2>
         <p>Lambda Funktionen sind anonyme Funktionen die ihre gebundenen
             Variablen konservieren</p>
-        <pre><code class="hljs" data-trim contenteditable>
-        </code></pre>
+        <img src="assets/images/lambda.png" width="600px">
     </section>
     <section>
         <p>Vor Lambda Funktion gab es Funktionsobjekte</p>
@@ -21,6 +20,14 @@ adder add42(42);
 
 // and "call" it
 int i = add42(8);
+        </code></pre>
+    </section>
+    <section>
+        <p>Die gleiche Implementation mit Lambda Funktion</p>
+        <pre><code class="hljs cpp" data-trim>
+auto add42 = [](int i) { return i + 42; };
+
+std::cout &lt;&lt; "8 + 42 = " &lt;&lt; add42(8) &lt;&lt; "\n";
         </code></pre>
     </section>
 </section>

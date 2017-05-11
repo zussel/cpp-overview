@@ -50,9 +50,77 @@ std::cout &lt;&lt; "fibonacci&lt;40&gt;: " &lt;&lt; fibonacci&lt;40&gt;::value &
         </code></pre>
     </section>
     <section>
-        <p>Traits</p>
+        <p>Mit <i>type_traits</i> werden Entscheidungen zur Compilezeit getroffen</p>
+        <pre><code class="hljs cpp" data-trim>
+// 1. Rückgabewert (bool) ist nur gültig,
+// wenn T ein integraler Typ ist:
+template &lt;class T&gt;
+typename std::enable_if&lt;std::is_integral&lt;T&gt;::value,bool&gt;::type
+is_odd (T i) {
+    return bool(i%2);
+}
+
+// 2. Das 2. Template Argument ist nur gültig,
+// wenn T ein integraler Typ ist:
+template &lt; class T, class = typename std::enable_if&lt;
+                                      std::is_integral&lt;T&gt;::value
+                                     &gt;::type&gt;
+bool is_even (T i) {
+    return !bool(i%2);
+}
+        </code></pre>
     </section>
     <section>
-        <p>Assert</p>
+        <p>Damit existieren die Funktionen nur für integrale Typen</p>
+        <pre><code class="hljs cpp" data-trim>
+short int i = 1;
+
+std::cout &lt;&lt; std::boolalpha;
+std::cout &lt;&lt; "i is odd: " &lt;&lt; is_odd(i) &lt;&lt; std::endl;
+std::cout &lt;&lt; "i is even: " &lt;&lt; is_even(i) &lt;&lt; std::endl;
+        </code></pre>
+    </section>
+    <section>
+        <p>Für alle anderen Typen meckert der Compiler</p>
+        <pre><code class="hljs cpp" data-trim>
+double i = 1.0;
+
+std::cout &lt;&lt; std::boolalpha;
+std::cout &lt;&lt; "i is odd: " &lt;&lt; is_odd(i) &lt;&lt; std::endl;
+std::cout &lt;&lt; "i is even: " &lt;&lt; is_even(i) &lt;&lt; std::endl;
+        </code></pre>
+        <p class="fragment">Fehler: keine passende Funktion für Aufruf...</p>
+    </section>
+    <section>
+        <p>Der Standard gibt eine mehr Traits her</p>
+        <p class="fragment"><small style="text-align: left;">
+is_abstract, is_arithmetic, is_array, is_assignable, is_base_of, is_class, is_compound, 
+is_const, is_constructible, is_convertible, is_copy_assignable, is_copy_constructible, is_default_constructible, is_destructible, is_empty, 
+is_enum, is_floating_point, is_function, is_fundamental, 
+is_integral, is_literal_type, is_lvalue_reference, is_member_function_pointer, is_member_object_pointer, is_member_pointer, is_move_assignable, 
+is_move_constructible, is_nothrow_assignable, is_nothrow_constructible, is_nothrow_copy_assignable, is_nothrow_copy_constructible, is_nothrow_default_constructible, 
+is_nothrow_destructible, is_nothrow_move_assignable, is_nothrow_move_constructible, is_null_pointer, is_object, is_pod, is_pointer, is_polymorphic, 
+is_reference, is_rvalue_reference, is_same, is_scalar, is_signed, is_standard_layout, is_trivial, 
+is_trivially_assignable, is_trivially_constructible, is_trivially_copyable, is_trivially_copy_assignable, 
+is_trivially_copy_constructible, is_trivially_default_constructible, is_trivially_destructible, is_trivially_move_assignable, 
+is_trivially_move_constructible, is_union, is_unsigned, is_void, is_volatile
+        </small></p>
+    </section>
+    <section>
+        <p>Mit <i>static_assert</i> können Werte zur Compilezeit geprüft werden</p>
+        <pre><code class="hljs cpp" data-trim>
+struct version
+{
+    static const int major = 3;
+};
+
+static_assert(version::major &gt; 4, "major is too small :(");
+
+int main()
+{ 
+    return version::major;
+}
+        </code></pre>
+        <p class="fragment">Fehler: statische Erklärung gescheitert...</p>
     </section>
 </section>
