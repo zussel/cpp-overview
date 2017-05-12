@@ -2,7 +2,7 @@
     <section>
         <h2>Initialisierungslisten</h2>
         <p>Bisher aufwendiger Code zum Initialisieren von Container</p>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs cpp" data-trim>
 std::vector&lt;int&gt; int_vector;
 
 int_vector.push_back(1);
@@ -22,7 +22,7 @@ for (int i : int_vector) {
             Anhand von Initialisierungslisten können Klassen und
             Container einheitlich initialisiert werden.
         </p>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs cpp" data-trim>
 std::vector&lt;int&gt; int_vector = {0, 1, 2, 3, 4, 5, 6};
 
 for (int i : {0, 1, 2, 3, 4, 5, 6}) {
@@ -34,7 +34,7 @@ for (int i : {0, 1, 2, 3, 4, 5, 6}) {
         <p>
             Klasse mit Initialisierungslisten-Konstruktor.
         </p>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs cpp" data-trim>
 struct columns {
     std::vector&lt;std::string&gt column_vector;
 
@@ -54,7 +54,7 @@ columns cols = { "id", "name", "height", "width", "lenght" };
     </section>
     <section>
         <p>Verschachtelte Initialisierungslisten</h2>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs cpp" data-trim>
 struct columns { /* ... */ };
 
 std::vector&lt;columns&gt columns_vector = {

@@ -1,18 +1,30 @@
 <!--Range based for loops -->
 <section>
-    <h2>Range basierte for loops</h2>
-    <p>
+    <section>
+        <h2>Range basierte for loops</h2>
+        <p class="fragment">Bisher aufwendige Schreibweise</p>
+        <pre class="fragment"><code class="hljs cpp" data-trim>
+std::vector&lt;int&gt; v = {0, 1, 2, 3, 4, 5};
+
+for (std::vector&lt;int&gt;::iterator i = v.begin(); i != v.end(); ++i {
+    std::cout &lt;&lt; i &lt;&lt; "\n";
+}
+        </code></pre>
+    </section>
+    <section>
+        <p>Die neue Schreibweise ist einfacher</p>
         <pre><code class="hljs cpp" data-trim>
 std::vector&lt;int&gt; v = {0, 1, 2, 3, 4, 5};
- 
+
 for (const int&amp;i : v) {
     std::cout &lt;&lt; i &lt;&lt; "\n";
 }
         </code></pre>
+        <p class="fragment">Das ganze funktioniert auch mit dem <i>auto</i> Schlüsselwort</p>
         <pre class="fragment"><code class="hljs cpp" data-trim>
 for (auto &amp;i : v) {
     std::cout &lt;&lt; i &lt;&lt; "\n";
 }
         </code></pre>
-    </p>
+    </section>
 </section>

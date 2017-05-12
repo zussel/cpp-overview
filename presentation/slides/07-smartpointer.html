@@ -7,7 +7,7 @@
     </section>
     <section>
         <p>Exkurs: Heap &amp; Stack</p>
-        <p class="fragment">Objekte auf dem Stack werden automatisch wieder freigegen</p>
+        <p class="fragment">Objekte auf dem Stack werden automatisch wieder freigegeben</p>
         <pre class="fragment"><code class="hljs cpp" data-trim>
 void foo() {
     std::string str = { "hallo" };
@@ -17,7 +17,7 @@ foo();
     </section>
     <section>
         <p>Exkurs: Heap &amp; Stack</p>
-        <p class="fragment">Objekte auf dem Heap müssen vom Entwickler wieder freigegen werden</p>
+        <p>Objekte auf dem Heap müssen vom Entwickler wieder freigegeben werden</p>
         <pre class="fragment"><code class="hljs cpp" data-trim>
 void foo() {
     std::string *str = new std::string("hallo");
@@ -53,13 +53,15 @@ void foo()
     </section>
     <section>
         <p>Referenzz&auml;hler inklusive mit <i>shared_ptr</i></p>
-        <pre><code class="hljs cpp" data-trim>
+        <pre class="fragment"><code class="hljs cpp" data-trim>
+// gibt einen std::shared_ptr&lt;int&gt; zurück
 auto i1 = std::make_shared&lt;int&gt;(7);
+
 std::cout &lt;&lt; "use count: " &lt;&lt; i1.use_count() &lt;&lt; "\n";
 
 // $ use count: 1
-
 auto i2 = i1;
+
 std::cout &lt;&lt; "use count: " &lt;&lt; i1.use_count() &lt;&lt; "\n";
 
 // $ use count: 2

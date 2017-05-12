@@ -4,7 +4,7 @@
         <p>TMP erlaubt es Berechnungen, Entscheidungen oder Validierungen
             schon w&auml;hrend der Compilezeit vorzunehmen</p>
         <p class="fragment">Weiterhin wurden Templates um <i>Variadic Templates</i>
-        erweitert, eine beliebige Anzahl von Template Parametern zu beschreiben.</p>
+        erweitert, eine Syntax eine beliebige Anzahl von Template Parametern zu beschreiben.</p>
     </section>
     <section>
         <p>Variadic Templates: <i>adder</i> Funktion</p>
@@ -23,8 +23,8 @@ long sum = adder(1, 2, 3, 8, 7);
         </code></pre>
     </section>
     <section>
-        <p>Berechnungen: Fibonacci</p>
-        <pre><code class="hljs cpp" data-trim>
+        <p>Berechnungen zur Compilezeit am Beispiel von Fibonacci</p>
+        <pre class="fragment"><code class="hljs cpp" data-trim>
 template&lt;int n&gt;
 struct fibonacci
 {
@@ -51,7 +51,7 @@ std::cout &lt;&lt; "fibonacci&lt;40&gt;: " &lt;&lt; fibonacci&lt;40&gt;::value &
     </section>
     <section>
         <p>Mit <i>type_traits</i> werden Entscheidungen zur Compilezeit getroffen</p>
-        <pre><code class="hljs cpp" data-trim>
+        <pre class="fragment"><code class="hljs cpp" data-trim>
 // 1. Rückgabewert (bool) ist nur gültig,
 // wenn T ein integraler Typ ist:
 template &lt;class T&gt;
@@ -63,8 +63,8 @@ is_odd (T i) {
 // 2. Das 2. Template Argument ist nur gültig,
 // wenn T ein integraler Typ ist:
 template &lt; class T, class = typename std::enable_if&lt;
-                                      std::is_integral&lt;T&gt;::value
-                                     &gt;::type&gt;
+                                    std::is_integral&lt;T&gt;::value
+                                    &gt;::type&gt;
 bool is_even (T i) {
     return !bool(i%2);
 }
