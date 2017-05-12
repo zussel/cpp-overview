@@ -6,8 +6,29 @@
         <p class="fragment">Ab c++11 werden aber clevere Helfer zur Verfügung gestellt.</p>
     </section>
     <section>
+        <p>Exkurs: Heap &amp; Stack</p>
+        <p class="fragment">Objekte auf dem Stack werden automatisch wieder freigegen</p>
+        <pre class="fragment"><code class="hljs cpp" data-trim>
+void foo() {
+    std::string str = { "hallo" };
+}
+foo();
+        </code></pre>
+    </section>
+    <section>
+        <p>Exkurs: Heap &amp; Stack</p>
+        <p class="fragment">Objekte auf dem Heap müssen vom Entwickler wieder freigegen werden</p>
+        <pre class="fragment"><code class="hljs cpp" data-trim>
+void foo() {
+    std::string *str = new std::string("hallo");
+    delete str;
+}
+foo();
+        </code></pre>
+    </section>
+    <section>
         <p>Frage: Hast Du den Speicher auch wieder freigegeben?</p>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs cpp" data-trim>
 void foo()
 {
     int *i = new int;
@@ -15,21 +36,24 @@ void foo()
 }
         </code></pre>
         <p class="fragment">Antwort: Hab ich vergessen...</p>
+        <p class="fragment">Ergebnis: Memory Leak!</p>
     </section>
     <section>
         <p>L&ouml;sung ist <i>unique_ptr&lt;T&gt;</i></p>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs cpp" data-trim>
 void foo()
 {
+    // gibt einen std::unique_ptr&lt;int&gt; zurück
     auto i = std::make_unique&lt;int&gt;(7);
     // mach was damit
     *i = 8;
 }
         </code></pre>
+        <p class="fragment">unique_ptr gibt den Speicher am Ende des Scopes wieder frei</p>
     </section>
     <section>
         <p>Referenzz&auml;hler inklusive mit <i>shared_ptr</i></p>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs cpp" data-trim>
 auto i1 = std::make_shared&lt;int&gt;(7);
 std::cout &lt;&lt; "use count: " &lt;&lt; i1.use_count() &lt;&lt; "\n";
 
@@ -45,7 +69,7 @@ i1.reset();
 // last reset destroys pointer
         </code></pre>
     </section>
-    <section>
+    <!--<section>
         <p>Was ist aber mit zyklischen shared_ptr Verweise?</p>
-    </section>
+    </section>-->
 </section>

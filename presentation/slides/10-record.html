@@ -141,4 +141,34 @@ string c(some_function_returning_a_string());   // Line 3
         <p class="fragment">1: notwendiger Aufruf des Copy Konstruktors (LValue)</p>
         <p class="fragment">2+3: unnötiger Aufruf des Copy Konstruktors (RValue)</p>
     </section>
+    <section>
+        <p>C++ kann RValues detektieren und führt RValue Referenzen ein</p>
+        <p class="fragment">Damit gibt es 2 neue Konstruktoren</p>
+        <pre class="fragment"><code class="hljs cpp" data-trim>
+// string&amp;&amp; is an rvalue reference to a string
+string(string&amp;&amp; that) {
+    data = that.data;
+    that.data = nullptr;
+}
+string&amp; operator=(string&amp;&amp; that)
+{
+    data = that.data;
+    that.data = nullptr;
+    return *this;
+}
+        </code></pre>
+    </section>
+    <section>
+        <p>Der Pointer wird kopiert (keine tiefe Kopie) und im
+            original auf Null gesetzt.</p>
+        <p class="fragment">Was bedeutet das für unsere drei Aufrufe?</p>
+        <pre class="fragment"><code class="hljs cpp" data-trim>
+string a(x);                                    // Line 1
+string b(x + y);                                // Line 2
+string c(some_function_returning_a_string());   // Line 3
+        </code></pre>
+        <p class="fragment">1: notwendiger Aufruf des Copy Konstruktors (LValue)</p>
+        <p class="fragment">2+3: Hier wird nur der Speicher verschoben</p>
+        <p class="fragment">Weniger Speicherverbrauch und schneller!</p>
+    </section>
 </section>
