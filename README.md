@@ -1,5 +1,8 @@
 # cpp overview
+
 A c++ overview covering development and changes since pre c++98 to c++17
+
+Live presentation [here](https://zussel.github.io/cpp-overview/).
 
 Content
 - auto keyword
