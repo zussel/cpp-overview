@@ -13,3 +13,7 @@ target_compile_options(regex PUBLIC -std=c++1y -Wall -Wfloat-conversion)
 add_executable(tuple main_tuple.cpp)
 
 target_compile_options(tuple PUBLIC -std=c++1y -Wall -Wfloat-conversion)
+
+add_executable(nonmove main_nonmove.cpp)
+
+target_compile_options(nonmove PUBLIC -std=c++1y -Wall -Wfloat-conversion)
